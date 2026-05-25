@@ -6,7 +6,7 @@
 <title>Guvernanță Fiscală — Municipii România</title>
 <meta name="author" content="Andrei Pruteanu">
 <meta name="description" content="Dashboard comparativ de guvernanță fiscală și execuție bugetară pentru 17 municipii din România, bazat pe execuții bugetare oficiale 2016–2026. 7 indicatori: execuție bugetară, autonomie fiscală, investiții, arierate, cheltuieli de personal, cheltuieli sociale, per capita. Scorul compus este exploratoriu — verificați acoperirea și încrederea datelor.">
-<meta name="generated" content="24 May 2026, 21:01 UTC">
+<meta name="generated" content="25 May 2026, 22:44 UTC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -174,9 +174,10 @@ header{border-bottom:1px solid var(--border);padding:0 40px;height:54px;display:
 .cs{font-family:'Inter',sans-serif;font-size:11px;color:var(--text-muted);margin-bottom:2px;}
 .cc{font-family:'Inter',sans-serif;font-size:11px;color:var(--text-muted);margin-bottom:12px;}
 .cc a{color:var(--blue);text-decoration:none;}
-.cw{position:relative;height:230px;}
+.cw{position:relative;height:230px;width:100%;}
 .cw.tall{height:290px;}
 .cw.radar{height:330px;}
+canvas{display:block;max-width:100%;}
 .cleg{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
 .li{display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:11px;color:var(--text-dim);}
 .ls{width:18px;height:3px;border-radius:2px;}
@@ -257,6 +258,16 @@ header{border-bottom:1px solid var(--border);padding:0 40px;height:54px;display:
 .md{font-size:12px;color:var(--text-dim);line-height:1.65;font-family:'Inter',sans-serif;margin-bottom:3px;}
 .mc{font-family:'Inter',sans-serif;font-size:11px;color:var(--text-muted);}
 .mc a{color:var(--blue);text-decoration:none;}
+/* Formula back-reference in methodology cards */
+.meth-used{font-family:'Inter',sans-serif;font-size:10px;color:var(--text-muted);margin-top:7px;padding-top:6px;border-top:1px dashed var(--border);line-height:1.6;}
+.meth-used a{color:var(--amber);text-decoration:none;}
+.meth-used a:hover{text-decoration:underline;}
+/* Formula pill badge on chart headers */
+.fml-pill{display:inline-flex;align-items:center;gap:3px;padding:1px 7px;border-radius:4px;background:var(--amber-dim);border:1px solid var(--wborder);font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:var(--amber);text-decoration:none;transition:background .15s;white-space:nowrap;}
+.fml-pill:hover{opacity:.8;}
+/* Highlight on deep-link navigation */
+.meth-formula-box:target,.meth-ind:target{outline:2px solid var(--amber);outline-offset:3px;animation:meth-hl .9s ease-out;}
+@keyframes meth-hl{0%{background:color-mix(in srgb,var(--amber) 14%,var(--surface2))}100%{background:var(--surface2)}}
 
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--surface);transition:background .25s,border-color .25s;}
@@ -273,6 +284,9 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 .ldot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2.2s infinite;margin-right:5px;}
 
+/* MOBILE: TABLE SCROLL WRAPPER */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
 /* PRINT / PDF */
 @media print {
   header, .ctrl-panel, .hbtn, .pdf-btn, .theme-btn { display: none !important; }
@@ -281,13 +295,53 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
   .chart-grid { grid-template-columns: 1fr !important; }
 }
 
+/* RESPONSIVE: TABLET (≤900px) */
 @media(max-width:900px) {
-  header,.hero,.ctrl-panel,.content { padding-left:18px;padding-right:18px; }
-  .ctrl-panel { margin-left:18px;margin-right:18px; }
+  header { padding-left:20px; padding-right:20px; height:auto; min-height:54px; padding-top:8px; padding-bottom:8px; }
+  .hero { padding-left:20px; padding-right:20px; }
+  .ctrl-panel { margin-left:20px; margin-right:20px; width:auto; }
+  .content { padding-left:20px; padding-right:20px; }
+  footer { padding-left:20px; padding-right:20px; }
   .chart-grid { grid-template-columns:1fr; }
   .cpanel.wide { grid-column:1; }
   .footer-inner { grid-template-columns:1fr; }
   .author-block { text-align:left; }
+}
+
+/* RESPONSIVE: PHONE (≤600px) */
+@media(max-width:600px) {
+  header,footer { padding-left:14px; padding-right:14px; }
+  .hero { padding-left:14px; padding-right:14px; padding-top:28px; padding-bottom:18px; }
+  .ctrl-panel { margin-left:14px; margin-right:14px; padding:14px 16px; }
+  .content { padding-left:14px; padding-right:14px; }
+  .ctrl-row { flex-direction:column; align-items:flex-start; gap:12px; }
+  .yr-tabs { overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .yr-tabs::-webkit-scrollbar { display:none; }
+  .kpi-grid { grid-template-columns:1fr; }
+  .disc-grid { grid-template-columns:1fr; }
+  .meth-ind-grid { grid-template-columns:1fr; }
+  .mgrid { grid-template-columns:1fr; }
+  .data-src { display:none; }
+}
+
+/* RESPONSIVE: SMALL PHONE (≤480px) */
+@media(max-width:480px) {
+  header { padding-left:12px; padding-right:12px; }
+  .hero { padding-left:12px; padding-right:12px; padding-top:20px; padding-bottom:14px; }
+  .ctrl-panel { margin-left:12px; margin-right:12px; padding:12px 14px; }
+  .content { padding-left:12px; padding-right:12px; padding-bottom:50px; }
+  footer { padding-left:12px; padding-right:12px; }
+  .btn-lbl { display:none; }
+  .hbtn { padding:5px 9px; gap:3px; }
+  .scope-card { flex-direction:column; gap:10px; }
+  .dq-pill { font-size:10px; padding:3px 8px; }
+  .chip { font-size:11px; padding:4px 9px; }
+  .cw { height:185px; }
+  .cw.tall { height:235px; }
+  .cw.radar { height:260px; }
+  .bd-grid { grid-template-columns:1fr; }
+  .rgn-grid { grid-template-columns:1fr; }
+  .findings-strip { grid-template-columns:1fr 1fr; }
 }
 
 /* DELTA / SPARKLINE */
@@ -308,9 +362,9 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
   <div class="header-right">
     <div class="data-src"><span class="ldot"></span>Date: <a href="https://executii-bugetare.g4d.ro" target="_blank">executii-bugetare.g4d.ro</a></div>
     <div class="hbtn" onclick="toggleTheme()">
-      <span id="tIcon">☀️</span><span id="tLabel">Dark mode</span>
+      <span id="tIcon">☀️</span><span id="tLabel" class="btn-lbl">Dark mode</span>
     </div>
-    <div class="hbtn" onclick="downloadData()" title="Descarcă datele brute JSON">⬇ Date JSON</div>
+    <div class="hbtn" onclick="downloadData()" title="Descarcă datele brute JSON">⬇<span class="btn-lbl"> Date JSON</span></div>
     <div class="hbtn pdf-btn" onclick="downloadPDF()">⬇ PDF</div>
   </div>
 </header>
@@ -319,8 +373,8 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
   <h1>Guvernanță Fiscală și Execuție Bugetară — <em>România</em></h1>
   <p class="hero-sub">Dashboard comparativ de guvernanță fiscală și execuție bugetară pentru 17 municipii din România, bazat pe execuții bugetare oficiale 2016–2026. 7 indicatori: execuție bugetară, autonomie fiscală, investiții, arierate, cheltuieli de personal, cheltuieli sociale, per capita. Scorul compus este exploratoriu — verificați acoperirea și încrederea datelor.</p>
   <p class="hero-meta">
-    Generat: 24 May 2026, 21:01 UTC &nbsp;·&nbsp;
-    Date crawlate: 2026-05-24T21:00:04.437591Z &nbsp;·&nbsp;
+    Generat: 25 May 2026, 22:44 UTC &nbsp;·&nbsp;
+    Date crawlate: 2026-05-25T22:22:24.400497Z &nbsp;·&nbsp;
     Sursă primară: <a href="https://executii-bugetare.g4d.ro" target="_blank" style="color:var(--blue)">executii-bugetare.g4d.ro</a>
   </p>
 </div>
@@ -400,17 +454,17 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     <span class="sec-d">Grafice ordonate descrescător după performanță</span>
   </div>
   <div class="chart-grid">
-    <div class="cpanel wide">
-      <div class="ch"><div><div class="ct">Profil Fiscal — Radar Multi-Dimensional</div><div class="cs">7 INDICATORI NORMALIZAȚI · SCOR 0–100 · VALORILE ESTIMATE SAU LIPSĂ SUNT EXCLUSE</div><div class="cc">📖 <a href="https://stats.oecd.org/Index.aspx?DataSetCode=SNGF" target="_blank">OECD Fiscal Federalism</a> · <a href="https://www.pefa.org/node/6" target="_blank">World Bank PEFA</a></div></div><div class="cwt" id="radarW"></div></div>
+    <div class="cpanel wide" id="chart-radar">
+      <div class="ch"><div><div class="ct">Profil Fiscal — Radar Multi-Dimensional</div><div class="cs">7 INDICATORI NORMALIZAȚI · SCOR 0–100 · VALORILE ESTIMATE SAU LIPSĂ SUNT EXCLUSE</div><div class="cc">📖 <a href="https://stats.oecd.org/Index.aspx?DataSetCode=SNGF" target="_blank">OECD Fiscal Federalism</a> · <a href="https://www.pefa.org/node/6" target="_blank">World Bank PEFA</a> &nbsp;·&nbsp; <a href="#meth-composite" class="fml-pill">📐 formulă scor</a></div></div><div class="cwt" id="radarW"></div></div>
       <div class="cw radar"><canvas id="radarChart"></canvas></div>
       <div class="cleg" id="radarLeg"></div>
     </div>
-    <div class="cpanel"><div class="ch"><div><div class="ct">Cheltuieli Per Capita (Lei)</div><div class="cs">BUGET EXECUTAT / POPULAȚIE</div><div class="cc">📖 <a href="https://www.worldbank.org/en/topic/publicfinancialmanagement" target="_blank">World Bank PFM</a> · INS Romania</div></div><div class="cwt" id="pcW"></div></div><div class="cw"><canvas id="pcChart"></canvas></div></div>
-    <div class="cpanel"><div class="ch"><div><div class="ct">Rată de Execuție Bugetară (%)</div><div class="cs">PLĂȚI / CREDITE APROBATE · OPTIM 95–105% · abaterea față de 100% penalizată (PEFA PI-27)</div><div class="cc">📖 <a href="https://www.pefa.org/node/6" target="_blank">PEFA PI-27</a></div></div><div class="cwt" id="exW"></div></div><div class="cw"><canvas id="exChart"></canvas></div></div>
-    <div class="cpanel"><div class="ch"><div><div class="ct">Structura: Funcționare vs Dezvoltare</div><div class="cs">CAPITAL (%) — ORDONAT DESCRESCĂTOR</div><div class="cc">📖 <a href="https://www.oecd.org/en/publications/making-decentralisation-work_g2g9faa7-en.html" target="_blank">OECD Decentralisation 2019</a> · Legea 273/2006</div></div><div class="cwt" id="stW"></div></div><div class="cw"><canvas id="stChart"></canvas></div></div>
-    <div class="cpanel"><div class="ch"><div><div class="ct">Autonomie Fiscală (%)</div><div class="cs">VENITURI PROPRII / TOTAL · BENCHMARK &gt;45%</div><div class="cc">📖 <a href="https://stats.oecd.org/Index.aspx?DataSetCode=SNGF" target="_blank">OECD Sub-national Gov. Finance</a></div></div><div class="cwt" id="faW"></div></div><div class="cw"><canvas id="faChart"></canvas></div></div>
-    <div class="cpanel"><div class="ch"><div><div class="ct">Povară Cheltuieli Personal (% buget)</div><div class="cs">CLASIFICAȚIE ECONOMICĂ MF · TARGET &lt;12% · MAI MIC = POVARĂ MAI MICĂ (nu eficiență directă)</div><div class="cc">📖 <a href="https://mfinante.gov.ro" target="_blank">MF Romania — Clasificație Economică</a> · Legea-cadru 153/2017</div></div><div class="cwt" id="stfW"></div></div><div class="cw"><canvas id="stfChart"></canvas></div></div>
-    <div class="cpanel wide"><div class="ch"><div><div class="ct">Alocare pe Categorii Funcționale COFOG</div><div class="cs">% DIN TOTAL CHELTUIELI · Clasificare derivată automat din categoriile G4D (aproximativă)</div><div class="cc">📖 <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php/Government_expenditure_by_function_%E2%80%93_COFOG" target="_blank">Eurostat COFOG</a> · <a href="https://mfinante.gov.ro" target="_blank">MF Clasificație Bugetară Ord.1954/2005</a> · <em style="color:var(--text-muted)">⚠ poate necesita validare pe coduri oficiale</em></div></div><div class="cwt" id="catW"></div></div><div class="cw tall"><canvas id="catChart"></canvas></div></div>
+    <div class="cpanel" id="chart-pc"><div class="ch"><div><div class="ct">Cheltuieli Per Capita (Lei)</div><div class="cs">BUGET EXECUTAT / POPULAȚIE</div><div class="cc">📖 <a href="https://www.worldbank.org/en/topic/publicfinancialmanagement" target="_blank">World Bank PFM</a> · INS Romania &nbsp;·&nbsp; <a href="#meth-pc" class="fml-pill">📐 formulă PC</a></div></div><div class="cwt" id="pcW"></div></div><div class="cw"><canvas id="pcChart"></canvas></div></div>
+    <div class="cpanel" id="chart-er"><div class="ch"><div><div class="ct">Rată de Execuție Bugetară (%)</div><div class="cs">PLĂȚI / CREDITE APROBATE · OPTIM 95–105% · abaterea față de 100% penalizată (PEFA PI-27)</div><div class="cc">📖 <a href="https://www.pefa.org/node/6" target="_blank">PEFA PI-27</a> &nbsp;·&nbsp; <a href="#meth-er" class="fml-pill">📐 formulă ER</a></div></div><div class="cwt" id="exW"></div></div><div class="cw"><canvas id="exChart"></canvas></div></div>
+    <div class="cpanel" id="chart-dr"><div class="ch"><div><div class="ct">Structura: Funcționare vs Dezvoltare</div><div class="cs">CAPITAL (%) — ORDONAT DESCRESCĂTOR</div><div class="cc">📖 <a href="https://www.oecd.org/en/publications/making-decentralisation-work_g2g9faa7-en.html" target="_blank">OECD Decentralisation 2019</a> · Legea 273/2006 &nbsp;·&nbsp; <a href="#meth-dr" class="fml-pill">📐 formulă DR</a></div></div><div class="cwt" id="stW"></div></div><div class="cw"><canvas id="stChart"></canvas></div></div>
+    <div class="cpanel" id="chart-fa"><div class="ch"><div><div class="ct">Autonomie Fiscală (%)</div><div class="cs">VENITURI PROPRII / TOTAL · BENCHMARK &gt;45%</div><div class="cc">📖 <a href="https://stats.oecd.org/Index.aspx?DataSetCode=SNGF" target="_blank">OECD Sub-national Gov. Finance</a> &nbsp;·&nbsp; <a href="#meth-fa" class="fml-pill">📐 formulă FA</a></div></div><div class="cwt" id="faW"></div></div><div class="cw"><canvas id="faChart"></canvas></div></div>
+    <div class="cpanel" id="chart-stf"><div class="ch"><div><div class="ct">Povară Cheltuieli Personal (% buget)</div><div class="cs">CLASIFICAȚIE ECONOMICĂ MF · TARGET &lt;12% · MAI MIC = POVARĂ MAI MICĂ (nu eficiență directă)</div><div class="cc">📖 <a href="https://mfinante.gov.ro" target="_blank">MF Romania — Clasificație Economică</a> · Legea-cadru 153/2017 &nbsp;·&nbsp; <a href="#meth-stf" class="fml-pill">📐 formulă STF</a></div></div><div class="cwt" id="stfW"></div></div><div class="cw"><canvas id="stfChart"></canvas></div></div>
+    <div class="cpanel wide" id="chart-cat"><div class="ch"><div><div class="ct">Alocare pe Categorii Funcționale COFOG</div><div class="cs">% DIN TOTAL CHELTUIELI · Clasificare derivată automat din categoriile G4D (aproximativă)</div><div class="cc">📖 <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php/Government_expenditure_by_function_%E2%80%93_COFOG" target="_blank">Eurostat COFOG</a> · <a href="https://mfinante.gov.ro" target="_blank">MF Clasificație Bugetară Ord.1954/2005</a> · <em style="color:var(--text-muted)">⚠ poate necesita validare pe coduri oficiale</em> &nbsp;·&nbsp; <a href="#meth-sr" class="fml-pill">📐 formulă SR</a></div></div><div class="cwt" id="catW"></div></div><div class="cw tall"><canvas id="catChart"></canvas></div></div>
   </div>
 
   <div class="sec-h">
@@ -418,7 +472,10 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     <span class="sec-d">Scor agregat ponderat · 7 indicatori · reponderat pe componentele scorabile · Max 100 · Verificați acoperire și încredere</span>
   </div>
   <div class="cpanel" style="margin-bottom:18px">
-    <table class="rtable" id="rankTable"></table>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:8px"><a href="#meth-composite" class="fml-pill">📐 formulă scor compus</a></div>
+    <div class="table-scroll">
+      <table class="rtable" id="rankTable"></table>
+    </div>
   </div>
 
   <!-- ── MULTI-YEAR TRENDS ──────────────────────────────────── -->
@@ -427,8 +484,8 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     <span class="sec-d">Tendințe 2017–2025 (ani compleți) · 2016 și 2026 YTD afișate separate · Acoperire variabilă pe ani</span>
   </div>
   <div class="chart-grid">
-    <div class="cpanel wide">
-      <div class="ch"><div><div class="ct">Scor Comun Comparabil — Evoluție în Timp</div><div class="cs">FA + DR + STF + SR + PC · ER și AR excluse · Comparabil 2017–2025</div></div></div>
+    <div class="cpanel wide" id="chart-trend-comp">
+      <div class="ch"><div><div class="ct">Scor Comun Comparabil — Evoluție în Timp</div><div class="cs">FA + DR + STF + SR + PC · ER și AR excluse · Comparabil 2017–2025</div><div class="cc"><a href="#meth-composite" class="fml-pill">📐 formulă scor</a></div></div></div>
       <div class="cw tall"><canvas id="trendComp"></canvas></div>
       <div class="cleg" id="trendCompLeg"></div>
       <div style="font-size:11px;color:var(--text-muted);margin-top:6px;padding:4px 8px;background:var(--surface2);border-radius:4px">
@@ -436,15 +493,15 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
         ER exclus (ta estimat în 2016–2020, 2024+) · AR exclus (arierate indisponibile în afara 2021–2023).
       </div>
     </div>
-    <div class="cpanel"><div class="ch"><div><div class="ct">Autonomie Fiscală (%)</div><div class="cs">VENITURI PROPRII / TOTAL VENITURI</div></div></div><div class="cw"><canvas id="trendFA"></canvas></div></div>
-    <div class="cpanel"><div class="ch"><div><div class="ct">Rata Investiții — Capital (%)</div><div class="cs">CHELTUIELI CAPITAL / TOTAL EXECUTAT</div></div></div><div class="cw"><canvas id="trendDR"></canvas></div></div>
-    <div class="cpanel"><div class="ch"><div><div class="ct">Rată Execuție Bugetară (%)</div><div class="cs">PLĂȚI EXECUTATE / CREDITE APROBATE</div></div></div><div class="cw"><canvas id="trendER"></canvas></div></div>
-    <div class="cpanel"><div class="ch"><div><div class="ct">Povară Personal (%)</div><div class="cs">% DIN BUGETUL EXECUTAT · MAI MIC = POVARĂ MAI MICĂ</div></div></div><div class="cw"><canvas id="trendSTF"></canvas></div></div>
+    <div class="cpanel" id="chart-trend-fa"><div class="ch"><div><div class="ct">Autonomie Fiscală (%)</div><div class="cs">VENITURI PROPRII / TOTAL VENITURI</div><div class="cc"><a href="#meth-fa" class="fml-pill">📐 formulă FA</a></div></div></div><div class="cw"><canvas id="trendFA"></canvas></div></div>
+    <div class="cpanel" id="chart-trend-dr"><div class="ch"><div><div class="ct">Rata Investiții — Capital (%)</div><div class="cs">CHELTUIELI CAPITAL / TOTAL EXECUTAT</div><div class="cc"><a href="#meth-dr" class="fml-pill">📐 formulă DR</a></div></div></div><div class="cw"><canvas id="trendDR"></canvas></div></div>
+    <div class="cpanel" id="chart-trend-er"><div class="ch"><div><div class="ct">Rată Execuție Bugetară (%)</div><div class="cs">PLĂȚI EXECUTATE / CREDITE APROBATE</div><div class="cc"><a href="#meth-er" class="fml-pill">📐 formulă ER</a></div></div></div><div class="cw"><canvas id="trendER"></canvas></div></div>
+    <div class="cpanel" id="chart-trend-stf"><div class="ch"><div><div class="ct">Povară Personal (%)</div><div class="cs">% DIN BUGETUL EXECUTAT · MAI MIC = POVARĂ MAI MICĂ</div><div class="cc"><a href="#meth-stf" class="fml-pill">📐 formulă STF</a></div></div></div><div class="cw"><canvas id="trendSTF"></canvas></div></div>
   </div>
 
   <div class="sec-h">
     <span class="sec-t">Structura Cheltuielilor pe Oraș</span>
-    <span class="sec-d">Descompunere funcțională · Ordonat după scor compus</span>
+    <span class="sec-d">Descompunere funcțională · Ordonat după scor compus &nbsp;<a href="#meth-sr" class="fml-pill">📐 COFOG SR</a> &nbsp;<a href="#meth-composite" class="fml-pill">📐 scor compus</a></span>
   </div>
   <div class="bd-grid" id="bdGrid"></div>
 
@@ -468,7 +525,10 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
   <div class="disc-grid">
     
     <div class="disc-card positive">
-      <span class="disc-tag tag-positive">⭐ Lider 2023</span>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
+        <span class="disc-tag tag-positive">⭐ Lider 2023</span>
+        <a href="#meth-composite" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
+      </div>
       <div class="disc-title">Oradea: Cel Mai Bun Scor Fiscal Observat 2023</div>
       <div class="disc-body"><strong style='color:#50c878'>Oradea</strong> conduce clasamentul exploratoriu 2023 cu <strong>70/100</strong> cu 17 puncte peste locul 2 (Iași: 53). Încredere: <span style='background:#3eb56a22;border:1px solid #3eb56a55;color:#3eb56a;padding:1px 7px;border-radius:4px;font-size:11px;font-weight:600'>🟢 HIGH</span>. Indicatori observabili puternici: autonomie fiscală <strong>39.6%</strong> (mai mare cu 12.6 pp față de medie); rata investiții <strong>31.9%</strong> (mai mare cu 6.4 pp față de medie). Arierate: <strong>0.36%</strong> din buget. Rectificări: <strong>1</strong> în 2023. <em style='color:var(--text-muted);font-size:12px'>Date de calitate înaltă (execuție observată + arierate din surse publicate).</em></div>
       
@@ -497,7 +557,10 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     </div>
     
     <div class="disc-card warning">
-      <span class="disc-tag tag-warning">🚨 Risc Structural</span>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
+        <span class="disc-tag tag-warning">🚨 Risc Structural</span>
+        <a href="#meth-composite" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
+      </div>
       <div class="disc-title">Pitești: Cel Mai Slab Scor Fiscal Observat 2023</div>
       <div class="disc-body"><strong style='color:#9b72cf'>Pitești</strong> încheie clasamentul 2023 cu <strong>22/100</strong> (acoperire 100%). Arierate: <strong>6.1%</strong> din buget (media eșantion: 3.6%). Autonomie fiscală: <strong>21.5%</strong> — dependență de <strong>78%</strong> transferuri centrale. Ponderea cheltuielilor de personal: <strong>18.6%</strong>.</div>
       
@@ -526,7 +589,10 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     </div>
     
     <div class="disc-card warning">
-      <span class="disc-tag tag-warning">📉 Arierate Critice</span>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
+        <span class="disc-tag tag-warning">📉 Arierate Critice</span>
+        <a href="#meth-ar" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
+      </div>
       <div class="disc-title">8 Orașe cu Arierate Peste 3% din Buget</div>
       <div class="disc-body"><strong>8 din 17 orașe</strong> depășesc pragul de 3% arierate (>90 zile) din bugetul executat: <span style='color:#00c9c9'>Brăila</span>, <span style='color:#50c878'>Bacău</span>, <span style='color:#9b72cf'>Pitești</span>, <span style='color:#a0d468'>Galați</span>, <span style='color:#f07850'>Râmnicu Vâlcea</span>, <span style='color:#ffd700'>Ploiești</span>, <span style='color:#e05c5c'>Târgu Mureș</span>, <span style='color:#f07850'>Constanța</span>. Medie grup: <strong>5.3%</strong>; cel mai afectat: <strong style='color:#00c9c9'>Brăila</strong> cu <strong>7.51%</strong> (58M Lei). Total arierate acumulate în grup: <strong>385M Lei</strong>. Arieratele >90 zile blochează accesul la finanțare externă (Legea 273/2006).<br><em style='font-size:11px;color:var(--text-muted)'>Notă: datele privind arieratele sunt disponibile numai pentru anii cu date suplimentare (2021–2023). Pentru ceilalți ani, componenta este exclusă din scor.</em></div>
       
@@ -555,7 +621,10 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     </div>
     
     <div class="disc-card trend">
-      <span class="disc-tag tag-trend">🗺 Diferențe între Orașe pe Regiuni</span>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
+        <span class="disc-tag tag-trend">🗺 Diferențe între Orașe pe Regiuni</span>
+        <a href="#meth-composite" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
+      </div>
       <div class="disc-title">Scor mediu al orașelor selectate: NV (N=2, scor 53.0) vs S (N=2, scor 24.5)</div>
       <div class="disc-body">Regiune cu scor mai ridicat (în eșantion): <strong>NV</strong> (N=2: Cluj-Napoca, Oradea) — scor mediu <strong>53.0/100</strong>, autonomie fiscală <strong>30.5%</strong>, personal <strong>23.9%</strong>. Regiune cu scor mai redus (în eșantion): <strong>S</strong> (N=2: Ploiești, Pitești) — scor <strong>24.5/100</strong>, autonomie <strong>24.4%</strong>, personal <strong>21.5%</strong>. Diferență: <strong>28.5 puncte</strong>.<br><em style='font-size:11px;color:var(--text-muted)'>Nu reprezintă performanța întregii regiuni. Medie calculată numai pentru orașele din eșantionul de 17 municipii — nu este un indicator regional oficial.</em></div>
       
@@ -584,7 +653,10 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     </div>
     
     <div class="disc-card trend">
-      <span class="disc-tag tag-trend">💰 Povară Personal</span>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
+        <span class="disc-tag tag-trend">💰 Povară Personal</span>
+        <a href="#meth-stf" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
+      </div>
       <div class="disc-title">Cheltuieli de Personal: Corelație Slabă cu Scorul Fiscal</div>
       <div class="disc-body">Regresie liniară pe cele 17 orașe (2023): fiecare procent suplimentar de cheltuieli de personal se asociază cu <strong>0.1 puncte de scor fiscal</strong> (R=-0.03, corelație slabă). Povara minimă: <strong style='color:#f07850'>Constanța</strong> — <strong>9.7%</strong> personal. Povara maximă: <strong style='color:#a0d468'>Galați</strong> — <strong>30.5%</strong> personal. Diferența de <strong>20.8 pp</strong> echivalează cu ~<strong>208M Lei/an</strong> la un buget de 1B Lei.<br><em style='font-size:11px;color:var(--text-muted)'>Notă: ponderea cheltuielilor de personal reflectă structura administrativă — nu poate fi interpretată direct ca eficiență fără a ține cont de responsabilitățile delegate.</em></div>
       
@@ -613,7 +685,10 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     </div>
     
     <div class="disc-card positive">
-      <span class="disc-tag tag-positive">📈 Evoluție 2017–2025</span>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
+        <span class="disc-tag tag-positive">📈 Evoluție 2017–2025</span>
+        <a href="#meth-composite" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
+      </div>
       <div class="disc-title">Trenduri Ani Compleți 2017–2025: Scor Comun Comparabil</div>
       <div class="disc-body">Evoluție 2017→2025 pe scor comun comparabil (FA+DR+STF+SR+PC), calculat identic pentru toți anii compleți 2017–2025. <strong>16</strong> orașe au progresat, <strong>1</strong> au regresat. Cel mai mare progres: <strong style='color:#f07850'>Constanța</strong> <strong>+26 puncte</strong> (32 → 58). Cel mai mare declin: <strong style='color:#f5a623'>București</strong> <strong>-6 puncte</strong> (36 → 30).<br><em style='font-size:11px;color:var(--text-muted)'>Trend calculat numai pentru ani compleți 2017–2025. ER exclus (ta estimat în 2016–2020, 2024+) · AR exclus (arierate indisponibile în afara 2021–2023). 2016 și 2026 YTD sunt excluse din calcul.</em></div>
       
@@ -637,7 +712,10 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     </div>
     
     <div class="disc-card anomaly">
-      <span class="disc-tag tag-anomaly">🏗 Capacitate Investițională</span>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
+        <span class="disc-tag tag-anomaly">🏗 Capacitate Investițională</span>
+        <a href="#meth-dr" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
+      </div>
       <div class="disc-title">Investiții vs Consum Curent: Polarizare în Eșantion</div>
       <div class="disc-body">Rata de investiții (capital / total executat) variază de la <strong>39.1%</strong> (<strong style='color:#e05c5c'>Târgu Mureș</strong>) la <strong>10.6%</strong> (<strong style='color:#ffd700'>Ploiești</strong>) — spread de <strong>28.5 pp</strong> față de media de <strong>25.5%</strong>. <strong>8 din 16 orașe</strong> investesc peste medie (municipii obișnuite).<br><em style='font-size:11px;color:var(--text-muted)'>Notă: clasificare capital derivată automat din cuvinte-cheie în liniile economice G4D — poate necesita validare pe coduri bugetare oficiale (Secțiunea Dezvoltare vs Funcționare).</em></div>
       
@@ -671,7 +749,7 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
   <!-- ── REGIONAL COMPARISON ─────────────────────────────────── -->
   <div class="sec-h">
     <span class="sec-t">Comparație Regională</span>
-    <span class="sec-d">Medie a orașelor selectate (nu toate municipiile din regiune) · N orașe per regiune afișat în card</span>
+    <span class="sec-d">Medie a orașelor selectate (nu toate municipiile din regiune) · N orașe per regiune afișat în card &nbsp;<a href="#meth-composite" class="fml-pill">📐 scor compus</a> &nbsp;<a href="#meth-fa" class="fml-pill">📐 FA</a> &nbsp;<a href="#meth-dr" class="fml-pill">📐 DR</a> &nbsp;<a href="#meth-stf" class="fml-pill">📐 STF</a></span>
   </div>
   <div class="rgn-grid" id="rgnGrid"></div>
   <div class="cpanel" style="margin-bottom:18px">
@@ -690,8 +768,11 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
   </div>
   <div class="cpanel wide" style="margin-bottom:18px">
     <div class="ch">
-      <span class="ct">Scor Compus per Regiune</span>
-      <span class="cs">Medie regională a scorului fiscal compus · 7 indicatori nominali · orașele selectate</span>
+      <div>
+        <span class="ct">Scor Compus per Regiune</span>
+        <div class="cs">Medie regională a scorului fiscal compus · 7 indicatori nominali · orașele selectate</div>
+        <div class="cc"><a href="#meth-composite" class="fml-pill">📐 formulă scor compus</a></div>
+      </div>
     </div>
     <div class="cw" style="height:220px"><canvas id="rgnChart"></canvas></div>
   </div>
@@ -704,7 +785,7 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
 
   <div class="meth">
     <!-- Composite formula -->
-    <div class="meth-formula-box">
+    <div class="meth-formula-box" id="meth-composite">
       <div class="meth-formula-lbl">Formula Scor Compus (0–100) — Scor Observat Reponderat</div>
       <div class="meth-formula-eq">
         Scor = Σ(componentă_i × pondere_i) / Σ(ponderile_componentelor_disponibile)<br>
@@ -718,53 +799,68 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
         Indicatori eliminați: Absorbție UE (date numai la nivel regional), Transparență (OBS nu acoperă UAT-uri individuale).<br>
         Valori nominale Lei — INS CPI: +5,1% 2021, +13,8% 2022, +10,4% 2023, ~5% 2024.
       </div>
+      <div class="meth-used" style="margin-top:10px;padding-top:8px">Folosit în: <a href="#chart-radar">↗ Radar Multi-Dimensional</a> · <a href="#chart-trend-comp">↗ Trend Scor Comun</a> · <a href="#rankTable">↗ Clasament Fiscal</a> · <a href="#discGrid">↗ Analize</a></div>
     </div>
 
     <!-- Individual indicators -->
     <div class="meth-ind-grid">
-      <div class="meth-ind">
+      <div class="meth-ind" id="meth-er">
         <div class="meth-ind-hdr"><span class="meth-abbr">ER</span><span class="meth-iname">Rată Execuție Bugetară</span><span class="meth-w">×25%</span></div>
         <div class="meth-fml">ER = Plăți_Executate / Credite_Aprobate × 100</div>
         <div class="meth-norm">Scor PEFA: max(0, 100 − |ER−100| × 4) · Optim: 95–105% · Penalizează atât sub- cât și supra-execuție</div>
         <div class="meth-norm" style="color:var(--red)">⚠ Exclus din scor când ta este estimat din rata istorică (2016–2020, 2024+)</div>
+        <div class="meth-norm"><em>De ce: PEFA PI-27 este standardul internațional de audit al execuției bugetare; un scor simetric față de 100% sancționează atât risipa (supra-execuție) cât și incapacitatea de absorbție (sub-execuție).</em></div>
         <div class="meth-src">📖 <a href="https://www.pefa.org/node/6" target="_blank">PEFA PI-27 — Expenditure Outturn</a></div>
+        <div class="meth-used">Folosit în: <a href="#chart-er">↗ Graf. Execuție</a> · <a href="#chart-trend-er">↗ Trend ER</a> · <a href="#kpiGrid">↗ KPI Clasament</a> · <a href="#discGrid">↗ Analize</a></div>
       </div>
-      <div class="meth-ind">
+      <div class="meth-ind" id="meth-fa">
         <div class="meth-ind-hdr"><span class="meth-abbr">FA</span><span class="meth-iname">Autonomie Fiscală Strictă</span><span class="meth-w">×20%</span></div>
         <div class="meth-fml">FA = Venituri_Proprii / Total_Venituri × 100</div>
         <div class="meth-norm">Scor: FA / 55 × 100 · Benchmark OECD: &gt;40% · Exclud: cod 04, 11, 40-49 (TVA, subv., UE)</div>
+        <div class="meth-norm"><em>De ce: Baza de date OECD SNGF este referința globală pentru autonomia fiscală sub-națională; definiția strictă (exclud transferuri și fonduri UE) izolează capacitatea proprie de mobilizare a resurselor.</em></div>
         <div class="meth-src">📖 <a href="https://stats.oecd.org/Index.aspx?DataSetCode=SNGF" target="_blank">OECD Sub-national Government Finance Database</a></div>
+        <div class="meth-used">Folosit în: <a href="#chart-fa">↗ Graf. Autonomie Fiscală</a> · <a href="#chart-trend-fa">↗ Trend FA</a> · <a href="#kpiGrid">↗ KPI Clasament</a> · <a href="#discGrid">↗ Analize</a></div>
       </div>
-      <div class="meth-ind">
+      <div class="meth-ind" id="meth-dr">
         <div class="meth-ind-hdr"><span class="meth-abbr">DR</span><span class="meth-iname">Rata de Investiții — Capital</span><span class="meth-w">×20%</span></div>
         <div class="meth-fml">DR = Cheltuieli_Capital / Total_Cheltuieli × 100</div>
         <div class="meth-norm">Scor: DR / 65 × 100 · Clasificare keyword din liniile economice G4D (aproximativă)</div>
+        <div class="meth-norm"><em>De ce: OECD 2019 identifică investiția sub-națională ca motor al convergenței regionale; un prag de referință de 35–40% este consistent cu bunele practici europene pentru municipii cu responsabilități de infrastructură.</em></div>
         <div class="meth-src">📖 <a href="https://www.oecd.org/en/publications/making-decentralisation-work_g2g9faa7-en.html" target="_blank">OECD Making Decentralisation Work 2019</a></div>
+        <div class="meth-used">Folosit în: <a href="#chart-dr">↗ Graf. Funcționare/Dezvoltare</a> · <a href="#chart-trend-dr">↗ Trend DR</a> · <a href="#kpiGrid">↗ KPI Clasament</a></div>
       </div>
-      <div class="meth-ind">
+      <div class="meth-ind" id="meth-ar">
         <div class="meth-ind-hdr"><span class="meth-abbr">AR</span><span class="meth-iname">Sănătate Fiscală (Arierate)</span><span class="meth-w">×15%</span></div>
         <div class="meth-fml">AR% = Arierate_&gt;90zile / Cheltuieli_Executate × 100</div>
         <div class="meth-norm">Scor: 100 − (AR% / 5 × 100) · Target MF: &lt;1%</div>
         <div class="meth-norm" style="color:var(--red)">⚠ Disponibil numai 2021–2023 · Exclus (null) — NU înlocuit cu zero — în ceilalți ani</div>
+        <div class="meth-norm"><em>De ce: Arieratele >90 de zile sunt indicatorul reglementat de MF Romania (Ord. 2281/2009) pentru supravegherea sănătății fiscale a UAT-urilor; pragul de 5% din cheltuieli este plafonul de alertă timpurie.</em></div>
         <div class="meth-src">📖 <a href="https://mfinante.gov.ro/en/domenii/bugetul-de-stat/informatii-executie-bugetara" target="_blank">MF Romania — Situația Arieratelor UAT</a></div>
+        <div class="meth-used">Folosit în: <a href="#kpiGrid">↗ KPI Clasament</a> · <a href="#discGrid">↗ Analize</a></div>
       </div>
-      <div class="meth-ind">
+      <div class="meth-ind" id="meth-stf">
         <div class="meth-ind-hdr"><span class="meth-abbr">STF</span><span class="meth-iname">Povară Cheltuieli Personal</span><span class="meth-w">×10%</span></div>
         <div class="meth-fml">STF% = Cheltuieli_Personal / Total_Executat × 100 (inversat)</div>
         <div class="meth-norm">Scor: max(0, 100 − (STF%−8)/14×100) · Interpretare: povară, nu eficiență directă</div>
+        <div class="meth-norm"><em>De ce: Clasificația economică MF (Legea 153/2017) oferă date comparabile; indicatorul este inversat deoarece o pondere mai mare de personal lasă mai puține resurse pentru investiții și servicii. Notă: nu reflectă eficiența individuală a angajaților.</em></div>
         <div class="meth-src">📖 <a href="https://mfinante.gov.ro/en/domenii/bugetul-de-stat/informatii-executie-bugetara" target="_blank">MF Romania — Clasificație Economică</a> · <a href="https://legislatie.just.ro/Public/DetaliiDocumentAfis/177680" target="_blank">Legea-cadru 153/2017</a></div>
+        <div class="meth-used">Folosit în: <a href="#chart-stf">↗ Graf. Povară Personal</a> · <a href="#chart-trend-stf">↗ Trend STF</a> · <a href="#kpiGrid">↗ KPI Clasament</a> · <a href="#discGrid">↗ Analize</a></div>
       </div>
-      <div class="meth-ind">
+      <div class="meth-ind" id="meth-sr">
         <div class="meth-ind-hdr"><span class="meth-abbr">SR</span><span class="meth-iname">Cheltuieli Sociale (descriptiv)</span><span class="meth-w">×5%</span></div>
         <div class="meth-fml">SR = (COFOG_Edu% + COFOG_Sănătate% + COFOG_Social%)</div>
         <div class="meth-norm">Scor: SR / 40 × 100 · Clasificare keyword G4D — valoare descriptivă, nu normativă</div>
+        <div class="meth-norm"><em>De ce: Clasificarea funcțională COFOG (Eurostat/UN) este standardul internațional pentru compararea structurii cheltuielilor publice; sumarea edu + sănătate + social reflectă orientarea socio-umană a bugetului, aliniată cu SDG 1, 3, 4.</em></div>
         <div class="meth-src">📖 <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php/Government_expenditure_by_function_%E2%80%93_COFOG" target="_blank">Eurostat COFOG Classification</a></div>
+        <div class="meth-used">Folosit în: <a href="#chart-cat">↗ Graf. COFOG Funcțional</a> · <a href="#kpiGrid">↗ KPI Clasament</a> · <a href="#discGrid">↗ Analize</a></div>
       </div>
-      <div class="meth-ind">
+      <div class="meth-ind" id="meth-pc">
         <div class="meth-ind-hdr"><span class="meth-abbr">PC</span><span class="meth-iname">Cheltuieli Per Capita</span><span class="meth-w">×5%</span></div>
         <div class="meth-fml">PC = Total_Executat_Lei / Populație_Rezidentă (Lei/locuitor)</div>
         <div class="meth-norm">Scor: PC / 11.000 × 100 · Populație: 2021 census (statică) · Valori nominale Lei</div>
+        <div class="meth-norm"><em>De ce: World Bank PFM recomandă cheltuiala per capita ca proxy al capacității de livrare de servicii; normalizarea la 11.000 Lei reflectă mediana inferioară observată în eșantionul de municipii (2022–2024).</em></div>
         <div class="meth-src">📖 <a href="https://www.worldbank.org/en/topic/publicfinancialmanagement" target="_blank">World Bank — Public Financial Management</a> · <a href="https://statistici.insse.ro" target="_blank">INS Romania</a></div>
+        <div class="meth-used">Folosit în: <a href="#chart-pc">↗ Graf. Per Capita</a> · <a href="#kpiGrid">↗ KPI Clasament</a> · <a href="#discGrid">↗ Analize</a></div>
       </div>
     </div>
 
@@ -839,7 +935,7 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     <div class="author-block">
       <div class="author-meta">
         Creat de <a href="https://ro.linkedin.com/in/andrei-pruteanu-0b2b2415?trk=people-guest_people_search-card" target="_blank">Andrei Pruteanu</a> cu ajutorul <a href="https://claude.ai" target="_blank">Claude.ai</a><br>
-        24 May 2026, 21:01 UTC · v3.0.0
+        25 May 2026, 22:44 UTC · v3.0.0
       </div>
     </div>
   </div>
@@ -17307,7 +17403,7 @@ function downloadData() {
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
   a.href     = url;
-  a.download = 'guvernare-orase-romania-24_May_2026,_21-01_UTC.json';
+  a.download = 'guvernare-orase-romania-25_May_2026,_22-44_UTC.json';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -17325,7 +17421,7 @@ function downloadPDF() {
   const el = document.getElementById('main-content');
   const opt = {
     margin:       [10, 8, 10, 8],
-    filename:     'romania-governance-24_May_2026,_21-01_UTC.pdf',
+    filename:     'romania-governance-25_May_2026,_22-44_UTC.pdf',
     image:        { type: 'jpeg', quality: 0.96 },
     html2canvas:  { scale: 1.8, useCORS: true, logging: false },
     jsPDF:        { unit: 'mm', format: 'a3', orientation: 'portrait' },
@@ -17486,6 +17582,7 @@ const KDEFS=[
   {k:'sr', lbl:'Cheltuieli Sociale (COFOG)',   sh:'Social',    tgt:'28–35%',  hi:true, norm:42,   cite:'UN SDG / Eurostat COFOG',url:'https://sdgs.un.org/goals',                                                           fmt:v=>v+'%'},
   {k:'stf',lbl:'Povară Cheltuieli Personal (% buget)',sh:'Personal',tgt:'< 12%',hi:false,norm:22,cite:'MF Romania — Cls. Econ.',url:'https://mfinante.gov.ro/en/domenii/bugetul-de-stat/informatii-executie-bugetara',fmt:v=>v+'%'},
 ];
+const METH_ANCHORS={er:'#meth-er',pc:'#meth-pc',fa:'#meth-fa',dr:'#meth-dr',ar:'#meth-ar',sr:'#meth-sr',stf:'#meth-stf'};
 function getV(m,k){ return m[k]; }
 
 function renderKPIs(cities) {
@@ -17511,7 +17608,7 @@ function renderKPIs(cities) {
         <div class="kpi-lbl">${kd.lbl}<br><span style="color:var(--amber);opacity:.8">${kd.tgt}</span></div>
         <div class="kpi-wbadge" style="border-color:${rows[0].color}55;background:${rows[0].color}12;color:${rows[0].color}">🥇 ${rows[0].name.split('-')[0].split(' ')[0]}</div>
       </div>
-      <div class="kpi-cite">📖 <a href="${kd.url}" target="_blank">${kd.cite}</a></div>
+      <div class="kpi-cite">📖 <a href="${kd.url}" target="_blank">${kd.cite}</a> &nbsp;·&nbsp; <a href="${METH_ANCHORS[kd.k]}" class="fml-pill">📐 formulă</a></div>
       ${erNote}
       <div class="kpi-rows">
         ${rows.map((c,i)=>{
@@ -17755,7 +17852,10 @@ function renderBD(cities) {
     const mp=m.raw.sp[cats[0].k];
     return `<div class="bd-card"><div class="bd-cn"><span class="kdot" style="background:${c.color};width:10px;height:10px"></span>${c.name}</div>
       ${cats.map(ct=>{const p=m.raw.sp[ct.k];return `<div class="bd-row"><span class="bd-cat">${ct.l}</span><span class="bd-pct" style="color:${c.color}">${p.toFixed(1)}%</span></div><div class="bd-bg"><div class="bd-fill" style="width:${p/mp*100}%;background:${c.color}88"></div></div>`;}).join('')}
-      <div style="margin-top:9px;padding-top:8px;border-top:1px solid var(--border);font-family:'Inter',sans-serif;font-size:11px;color:var(--text-muted)">Executat: <span style="color:${c.color}">${m.raw.te.toLocaleString('ro')} M Lei</span> · Scor: <span style="color:${c.color}">${m.comp != null ? m.comp+'/100' : 'N/A'}</span></div>
+      <div style="margin-top:9px;padding-top:8px;border-top:1px solid var(--border);font-family:'Inter',sans-serif;font-size:11px;color:var(--text-muted);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+        <span>Executat: <span style="color:${c.color}">${m.raw.te.toLocaleString('ro')} M Lei</span> · Scor: <span style="color:${c.color}">${m.comp != null ? m.comp+'/100' : 'N/A'}</span></span>
+        <span style="display:flex;gap:4px"><a href="#meth-sr" class="fml-pill">📐 SR</a><a href="#meth-composite" class="fml-pill">📐 scor</a></span>
+      </div>
     </div>`;
   }).join('');
 }
@@ -17783,9 +17883,12 @@ const _cityRows = (sorted, rawFn, fmtFn, scoreFn) => {
   }).join('');
 };
 
-const _mkCard = (type, icon, tag, title, sub, sorted, rawFn, fmtFn, scoreFn) =>
+const _mkCard = (type, icon, tag, title, sub, sorted, rawFn, fmtFn, scoreFn, methAnchor='') =>
   `<div class="disc-card ${type}">
-    <span class="disc-tag tag-${type}">${icon} ${tag}</span>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
+      <span class="disc-tag tag-${type}">${icon} ${tag}</span>
+      ${methAnchor ? `<a href="${methAnchor}" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>` : ''}
+    </div>
     <div class="disc-title">${title}</div>
     <div class="disc-body" style="margin-bottom:10px">${sub}</div>
     <div style="border-top:1px solid var(--border);padding-top:9px">
@@ -17811,7 +17914,8 @@ function renderDiscussions(cities) {
     byComp,
     c => metrics(c,yr).comp,
     v => v != null ? `${v}/100` : 'N/A',
-    c => metrics(c,yr).comp
+    c => metrics(c,yr).comp,
+    '#meth-composite'
   ));
 
   /* 2 — Execution rate */
@@ -17822,7 +17926,8 @@ function renderDiscussions(cities) {
     byER,
     c => parseFloat(metrics(c,yr).er),
     v => `${v}%`,
-    c => metrics(c,yr).s.er
+    c => metrics(c,yr).s.er,
+    '#meth-er'
   ));
 
   /* 3 — Fiscal autonomy */
@@ -17833,7 +17938,8 @@ function renderDiscussions(cities) {
     byFA,
     c => parseFloat(metrics(c,yr).fa),
     v => `${v}%`,
-    c => metrics(c,yr).s.fa
+    c => metrics(c,yr).s.fa,
+    '#meth-fa'
   ));
 
   /* 4 — Arrears (lower=better → sort ascending, inverted score for bar) */
@@ -17845,7 +17951,8 @@ function renderDiscussions(cities) {
     byAR,
     c => parseFloat(metrics(c,yr).ar),
     v => `${v}%`,
-    c => metrics(c,yr).s.ar   /* already inverted: 100 − arrears_pct/5×100 */
+    c => metrics(c,yr).s.ar,   /* already inverted: 100 − arrears_pct/5×100 */
+    '#meth-ar'
   ));
 
   /* 5 — Staff efficiency */
@@ -17856,7 +17963,8 @@ function renderDiscussions(cities) {
     bySTF,
     c => metrics(c,yr).stf,
     v => `${v}%`,
-    c => metrics(c,yr).s.stf
+    c => metrics(c,yr).s.stf,
+    '#meth-stf'
   ));
 
   /* 6 — Per capita spending */
@@ -17867,7 +17975,8 @@ function renderDiscussions(cities) {
     byPC,
     c => metrics(c,yr).pc,
     v => `${fmt(v)} Lei`,
-    c => metrics(c,yr).s.pc
+    c => metrics(c,yr).s.pc,
+    '#meth-pc'
   ));
 
   el.innerHTML = cards.join('');
@@ -18127,6 +18236,12 @@ function renderAll(reChips=true) {
 /* ================================================================
    BOOT
 ================================================================ */
+
+// Resize all live charts when viewport changes (orientation flip, window resize)
+window.addEventListener('resize', () => {
+  Object.values(CHT).forEach(c => { try { c && c.resize(); } catch(e){} });
+});
+
 renderChips();
 renderAll(false);
 </script>

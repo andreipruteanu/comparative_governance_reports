@@ -6,7 +6,7 @@
 <title>Guvernanță Fiscală — Municipii România</title>
 <meta name="author" content="Andrei Pruteanu">
 <meta name="description" content="Dashboard comparativ de guvernanță fiscală și execuție bugetară pentru 17 municipii din România, bazat pe execuții bugetare oficiale 2016–2026. 7 indicatori: execuție bugetară, autonomie fiscală, investiții, arierate, cheltuieli de personal, cheltuieli sociale, per capita. Scorul compus este exploratoriu — verificați acoperirea și încrederea datelor.">
-<meta name="generated" content="17 Jun 2026, 13:05 UTC">
+<meta name="generated" content="17 Jun 2026, 13:22 UTC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -316,8 +316,8 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
   .content { padding-left:14px; padding-right:14px; }
   .ctrl-row { flex-direction:column; align-items:stretch; gap:12px; }
   .ctrl-row > div { width:100%; min-width:0; }
-  .yr-tabs { overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; max-width:100%; }
-  .yr-tabs::-webkit-scrollbar { display:none; }
+  .yr-tabs { flex-wrap:wrap; overflow-x:unset; }
+  .yr-tab { flex-shrink:0; }
   .kpi-grid { grid-template-columns:1fr; }
   .disc-grid { grid-template-columns:1fr; }
   .meth-ind-grid { grid-template-columns:1fr; }
@@ -374,7 +374,7 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
   <h1>Guvernanță Fiscală și Execuție Bugetară — <em>România</em></h1>
   <p class="hero-sub">Dashboard comparativ de guvernanță fiscală și execuție bugetară pentru 17 municipii din România, bazat pe execuții bugetare oficiale 2016–2026. 7 indicatori: execuție bugetară, autonomie fiscală, investiții, arierate, cheltuieli de personal, cheltuieli sociale, per capita. Scorul compus este exploratoriu — verificați acoperirea și încrederea datelor.</p>
   <p class="hero-meta">
-    Generat: 17 Jun 2026, 13:05 UTC &nbsp;·&nbsp;
+    Generat: 17 Jun 2026, 13:22 UTC &nbsp;·&nbsp;
     Date crawlate: 2026-05-25T22:22:24.400497Z &nbsp;·&nbsp;
     Sursă primară: <a href="https://executii-bugetare.g4d.ro" target="_blank" style="color:var(--blue)">executii-bugetare.g4d.ro</a>
   </p>
@@ -402,11 +402,11 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
         
         <button class="yr-tab" data-y="2022" onclick="selYear(2022)">2022</button>
         
-        <button class="yr-tab active" data-y="2023" onclick="selYear(2023)">2023</button>
+        <button class="yr-tab" data-y="2023" onclick="selYear(2023)">2023</button>
         
         <button class="yr-tab" data-y="2024" onclick="selYear(2024)">2024</button>
         
-        <button class="yr-tab" data-y="2025" onclick="selYear(2025)">2025</button>
+        <button class="yr-tab active" data-y="2025" onclick="selYear(2025)">2025</button>
         
         <button class="yr-tab" data-y="2026" onclick="selYear(2026)">2026</button>
         
@@ -516,38 +516,38 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
 
   
   <div id="staticConclusionsSection" class="sec-h" style="margin-top:32px">
-    <span class="sec-t">Concluzii Analitice — Anul Implicit 2023</span>
-    <span class="sec-d">Derivate automat din date · 7 analize · <em>Secțiune statică — reflectă exclusiv datele anului implicit (2023)</em></span>
+    <span class="sec-t">Concluzii Analitice — Anul Implicit 2025</span>
+    <span class="sec-d">Derivate automat din date · 7 analize · <em>Secțiune statică — reflectă exclusiv datele anului implicit (2025)</em></span>
   </div>
   <div id="staticConclusionsNotice" style="display:none;margin-bottom:12px;padding:8px 14px;border-left:3px solid var(--amber);background:var(--amber)12;font-family:'Inter',sans-serif;font-size:12px;color:var(--amber)">
-    ℹ Concluziile de mai jos reflectă datele anului <strong>2023</strong> (implicit).
+    ℹ Concluziile de mai jos reflectă datele anului <strong>2025</strong> (implicit).
     Pentru analiza anului selectat curent, folosiți secțiunea „Analize" de mai sus.
   </div>
   <div class="disc-grid">
     
     <div class="disc-card positive">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
-        <span class="disc-tag tag-positive">⭐ Lider 2023</span>
+        <span class="disc-tag tag-positive">⭐ Lider Exploratoriu 2025</span>
         <a href="#meth-composite" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
       </div>
-      <div class="disc-title">Oradea: Cel Mai Bun Scor Fiscal Observat 2023</div>
-      <div class="disc-body"><strong style='color:#50c878'>Oradea</strong> conduce clasamentul exploratoriu 2023 cu <strong>70/100</strong> cu 17 puncte peste locul 2 (Iași: 53). Încredere: <span style='background:#3eb56a22;border:1px solid #3eb56a55;color:#3eb56a;padding:1px 7px;border-radius:4px;font-size:11px;font-weight:600'>🟢 HIGH</span>. Indicatori observabili puternici: autonomie fiscală <strong>39.6%</strong> (mai mare cu 12.6 pp față de medie); rata investiții <strong>31.9%</strong> (mai mare cu 6.4 pp față de medie). Arierate: <strong>0.36%</strong> din buget. Rectificări: <strong>1</strong> în 2023. <em style='color:var(--text-muted);font-size:12px'>Date de calitate înaltă (execuție observată + arierate din surse publicate).</em></div>
+      <div class="disc-title">Constanța: Cel Mai Bun Scor Fiscal Observat 2025</div>
+      <div class="disc-body"><strong style='color:#f07850'>Constanța</strong> conduce clasamentul exploratoriu 2025 cu <strong>58/100</strong> cu 1 puncte peste locul 2 (Oradea: 57). Încredere: <span style='background:#d8585822;border:1px solid #d8585855;color:#d85858;padding:1px 7px;border-radius:4px;font-size:11px;font-weight:600'>🔴 LOW</span>. Indicatori observabili puternici: rata investiții <strong>32.7%</strong> (mai mare cu 7.1 pp față de medie); ponderea personalului <strong>10.5%</strong> (mai mic cu 9.1 pp față de medie). Arierate: <em>date indisponibile pentru acest an.</em> Rectificări: <em>date indisponibile pentru 2025.</em> <em style='color:var(--text-muted);font-size:12px'>Bugetul aprobat este estimat din rata istorică de execuție; arieratele lipsesc. Scorurile sunt exploratorii (acoperire ~60% din indicatori).</em></div>
       
       <div class="disc-stat">
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#50c878">70/100</span>
+          <span class="ds-val" style="color:#f07850">58/100</span>
           <span class="ds-lbl">Scor (obs.)</span>
         </div>
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#50c878">39.6%</span>
+          <span class="ds-val" style="color:#f07850">29.1%</span>
           <span class="ds-lbl">Autonomie Fiscală</span>
         </div>
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#50c878">103.0%</span>
-          <span class="ds-lbl">Execuție</span>
+          <span class="ds-val" style="color:#f07850">78.8%</span>
+          <span class="ds-lbl">Execuție (est.)</span>
         </div>
         
       </div>
@@ -562,56 +562,24 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
         <span class="disc-tag tag-warning">🚨 Risc Structural</span>
         <a href="#meth-composite" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
       </div>
-      <div class="disc-title">Pitești: Cel Mai Slab Scor Fiscal Observat 2023</div>
-      <div class="disc-body"><strong style='color:#9b72cf'>Pitești</strong> încheie clasamentul 2023 cu <strong>22/100</strong> (acoperire 100%). Arierate: <strong>6.1%</strong> din buget (media eșantion: 3.6%). Autonomie fiscală: <strong>21.5%</strong> — dependență de <strong>78%</strong> transferuri centrale. Ponderea cheltuielilor de personal: <strong>18.6%</strong>.</div>
+      <div class="disc-title">Ploiești: Cel Mai Slab Scor Fiscal Observat 2025</div>
+      <div class="disc-body"><strong style='color:#ffd700'>Ploiești</strong> încheie clasamentul 2025 cu <strong>34/100</strong> (acoperire 60%). Arierate: <em>date indisponibile</em>. Autonomie fiscală: <strong>26.4%</strong> — dependență de <strong>74%</strong> transferuri centrale. Ponderea cheltuielilor de personal: <strong>23.9%</strong>.</div>
       
       <div class="disc-stat">
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#e05c5c">22/100</span>
+          <span class="ds-val" style="color:#e05c5c">34/100</span>
           <span class="ds-lbl">Scor Observat</span>
         </div>
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#e05c5c">6.1%</span>
+          <span class="ds-val" style="color:#e05c5c">None</span>
           <span class="ds-lbl">Arierate/Buget</span>
         </div>
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#f5a623">18.6%</span>
+          <span class="ds-val" style="color:#f5a623">23.9%</span>
           <span class="ds-lbl">Chelt. Personal</span>
-        </div>
-        
-      </div>
-      
-      
-      <div class="disc-src">📖 <a href="https://mfinante.gov.ro/en/domenii/bugetul-de-stat/informatii-executie-bugetara" target="_blank">MF Romania — Execuții UAT</a> · <a href="https://www.pefa.org/node/6" target="_blank">PEFA PI-27</a></div>
-      
-    </div>
-    
-    <div class="disc-card warning">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
-        <span class="disc-tag tag-warning">📉 Arierate Critice</span>
-        <a href="#meth-ar" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
-      </div>
-      <div class="disc-title">8 Orașe cu Arierate Peste 3% din Buget</div>
-      <div class="disc-body"><strong>8 din 17 orașe</strong> depășesc pragul de 3% arierate (>90 zile) din bugetul executat: <span style='color:#00c9c9'>Brăila</span>, <span style='color:#50c878'>Bacău</span>, <span style='color:#9b72cf'>Pitești</span>, <span style='color:#a0d468'>Galați</span>, <span style='color:#f07850'>Râmnicu Vâlcea</span>, <span style='color:#ffd700'>Ploiești</span>, <span style='color:#e05c5c'>Târgu Mureș</span>, <span style='color:#f07850'>Constanța</span>. Medie grup: <strong>5.3%</strong>; cel mai afectat: <strong style='color:#00c9c9'>Brăila</strong> cu <strong>7.51%</strong> (58M Lei). Total arierate acumulate în grup: <strong>385M Lei</strong>. Arieratele >90 zile blochează accesul la finanțare externă (Legea 273/2006).<br><em style='font-size:11px;color:var(--text-muted)'>Notă: datele privind arieratele sunt disponibile numai pentru anii cu date suplimentare (2021–2023). Pentru ceilalți ani, componenta este exclusă din scor.</em></div>
-      
-      <div class="disc-stat">
-        
-        <div class="ds-item">
-          <span class="ds-val" style="color:#e05c5c">8</span>
-          <span class="ds-lbl">Orașe la Risc</span>
-        </div>
-        
-        <div class="ds-item">
-          <span class="ds-val" style="color:#e05c5c">7.51%</span>
-          <span class="ds-lbl">Max — Brăila</span>
-        </div>
-        
-        <div class="ds-item">
-          <span class="ds-val" style="color:#f5a623">385M Lei</span>
-          <span class="ds-lbl">Total Arierate Grup</span>
         </div>
         
       </div>
@@ -623,26 +591,58 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     
     <div class="disc-card trend">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
-        <span class="disc-tag tag-trend">🗺 Diferențe între Orașe pe Regiuni</span>
-        <a href="#meth-composite" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
+        <span class="disc-tag tag-trend">📉 Arierate</span>
+        <a href="#meth-ar" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
       </div>
-      <div class="disc-title">Scor mediu al orașelor selectate: NV (N=2, scor 53.0) vs S (N=2, scor 24.5)</div>
-      <div class="disc-body">Regiune cu scor mai ridicat (în eșantion): <strong>NV</strong> (N=2: Cluj-Napoca, Oradea) — scor mediu <strong>53.0/100</strong>, autonomie fiscală <strong>30.5%</strong>, personal <strong>23.9%</strong>. Regiune cu scor mai redus (în eșantion): <strong>S</strong> (N=2: Ploiești, Pitești) — scor <strong>24.5/100</strong>, autonomie <strong>24.4%</strong>, personal <strong>21.5%</strong>. Diferență: <strong>28.5 puncte</strong>.<br><em style='font-size:11px;color:var(--text-muted)'>Nu reprezintă performanța întregii regiuni. Medie calculată numai pentru orașele din eșantionul de 17 municipii — nu este un indicator regional oficial.</em></div>
+      <div class="disc-title">Arierate 2025: Date Indisponibile</div>
+      <div class="disc-body">Datele privind arieratele >90 zile nu sunt disponibile pentru 2025 în sursa curentă. Componenta AR (15% din scor) este exclusă din calculul compozit pentru acest an — vedeți panoul de calitate a datelor.<br>Date disponibile: 2021–2023 (din surse publice MF Romania).</div>
       
       <div class="disc-stat">
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#50c878">53.0</span>
+          <span class="ds-val" style="color:#7d8fa8">N/A</span>
+          <span class="ds-lbl">Arierate</span>
+        </div>
+        
+        <div class="ds-item">
+          <span class="ds-val" style="color:#7d8fa8">15%</span>
+          <span class="ds-lbl">Ponderea AR</span>
+        </div>
+        
+        <div class="ds-item">
+          <span class="ds-val" style="color:#7d8fa8">—</span>
+          <span class="ds-lbl">Exclude din Scor</span>
+        </div>
+        
+      </div>
+      
+      
+      <div class="disc-src">📖 <a href="https://mfinante.gov.ro/en/domenii/bugetul-de-stat/informatii-executie-bugetara" target="_blank">MF Romania — Execuții UAT</a></div>
+      
+    </div>
+    
+    <div class="disc-card trend">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">
+        <span class="disc-tag tag-trend">🗺 Diferențe între Orașe pe Regiuni</span>
+        <a href="#meth-composite" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
+      </div>
+      <div class="disc-title">Scor mediu al orașelor selectate: NV (N=2, scor 54.5) vs S (N=2, scor 39.0)</div>
+      <div class="disc-body">Regiune cu scor mai ridicat (în eșantion): <strong>NV</strong> (N=2: Cluj-Napoca, Oradea) — scor mediu <strong>54.5/100</strong>, autonomie fiscală <strong>29.8%</strong>, personal <strong>20.9%</strong>. Regiune cu scor mai redus (în eșantion): <strong>S</strong> (N=2: Ploiești, Pitești) — scor <strong>39.0/100</strong>, autonomie <strong>25.9%</strong>, personal <strong>20.2%</strong>. Diferență: <strong>15.5 puncte</strong>.<br><em style='font-size:11px;color:var(--text-muted)'>Nu reprezintă performanța întregii regiuni. Medie calculată numai pentru orașele din eșantionul de 17 municipii — nu este un indicator regional oficial.</em></div>
+      
+      <div class="disc-stat">
+        
+        <div class="ds-item">
+          <span class="ds-val" style="color:#50c878">54.5</span>
           <span class="ds-lbl">Scor NV</span>
         </div>
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#e05c5c">24.5</span>
+          <span class="ds-val" style="color:#e05c5c">39.0</span>
           <span class="ds-lbl">Scor S</span>
         </div>
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#f5a623">6.1pp</span>
+          <span class="ds-val" style="color:#f5a623">3.9pp</span>
           <span class="ds-lbl">Decalaj Autonomie</span>
         </div>
         
@@ -659,22 +659,22 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
         <a href="#meth-stf" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
       </div>
       <div class="disc-title">Cheltuieli de Personal: Corelație Slabă cu Scorul Fiscal</div>
-      <div class="disc-body">Regresie liniară pe cele 17 orașe (2023): fiecare procent suplimentar de cheltuieli de personal se asociază cu <strong>0.1 puncte de scor fiscal</strong> (R=-0.03, corelație slabă). Povara minimă: <strong style='color:#f07850'>Constanța</strong> — <strong>9.7%</strong> personal. Povara maximă: <strong style='color:#a0d468'>Galați</strong> — <strong>30.5%</strong> personal. Diferența de <strong>20.8 pp</strong> echivalează cu ~<strong>208M Lei/an</strong> la un buget de 1B Lei.<br><em style='font-size:11px;color:var(--text-muted)'>Notă: ponderea cheltuielilor de personal reflectă structura administrativă — nu poate fi interpretată direct ca eficiență fără a ține cont de responsabilitățile delegate.</em></div>
+      <div class="disc-body">Regresie liniară pe cele 17 orașe (2025): fiecare procent suplimentar de cheltuieli de personal se asociază cu <strong>-0.4 puncte de scor fiscal</strong> (R=-0.31, corelație slabă). Povara minimă: <strong style='color:#f07850'>Constanța</strong> — <strong>10.5%</strong> personal. Povara maximă: <strong style='color:#ff6b9d'>Craiova</strong> — <strong>29.9%</strong> personal. Diferența de <strong>19.4 pp</strong> echivalează cu ~<strong>194M Lei/an</strong> la un buget de 1B Lei.<br><em style='font-size:11px;color:var(--text-muted)'>Notă: ponderea cheltuielilor de personal reflectă structura administrativă — nu poate fi interpretată direct ca eficiență fără a ține cont de responsabilitățile delegate.</em></div>
       
       <div class="disc-stat">
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#f5a623">0.1</span>
+          <span class="ds-val" style="color:#f5a623">-0.4</span>
           <span class="ds-lbl">Pantă (puncte/pp)</span>
         </div>
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#f5a623">-0.03</span>
+          <span class="ds-val" style="color:#f5a623">-0.31</span>
           <span class="ds-lbl">Coef. Corelație R</span>
         </div>
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#e05c5c">20.8pp</span>
+          <span class="ds-val" style="color:#e05c5c">19.4pp</span>
           <span class="ds-lbl">Spread Personal</span>
         </div>
         
@@ -718,22 +718,22 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
         <a href="#meth-dr" class="fml-pill" style="flex-shrink:0;margin-top:1px">📐 formulă</a>
       </div>
       <div class="disc-title">Investiții vs Consum Curent: Polarizare în Eșantion</div>
-      <div class="disc-body">Rata de investiții (capital / total executat) variază de la <strong>39.1%</strong> (<strong style='color:#e05c5c'>Târgu Mureș</strong>) la <strong>10.6%</strong> (<strong style='color:#ffd700'>Ploiești</strong>) — spread de <strong>28.5 pp</strong> față de media de <strong>25.5%</strong>. <strong>8 din 16 orașe</strong> investesc peste medie (municipii obișnuite).<br><em style='font-size:11px;color:var(--text-muted)'>Notă: clasificare capital derivată automat din cuvinte-cheie în liniile economice G4D — poate necesita validare pe coduri bugetare oficiale (Secțiunea Dezvoltare vs Funcționare).</em></div>
+      <div class="disc-body">Rata de investiții (capital / total executat) variază de la <strong>36.8%</strong> (<strong style='color:#a0d468'>Galați</strong>) la <strong>11.2%</strong> (<strong style='color:#ffd700'>Ploiești</strong>) — spread de <strong>25.6 pp</strong> față de media de <strong>25.6%</strong>. <strong>8 din 16 orașe</strong> investesc peste medie (municipii obișnuite).<br><em style='font-size:11px;color:var(--text-muted)'>Notă: clasificare capital derivată automat din cuvinte-cheie în liniile economice G4D — poate necesita validare pe coduri bugetare oficiale (Secțiunea Dezvoltare vs Funcționare).</em></div>
       
       <div class="disc-stat">
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#50c878">39.1%</span>
-          <span class="ds-lbl">Max — Târgu Mureș</span>
+          <span class="ds-val" style="color:#50c878">36.8%</span>
+          <span class="ds-lbl">Max — Galați</span>
         </div>
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#f5a623">25.5%</span>
+          <span class="ds-val" style="color:#f5a623">25.6%</span>
           <span class="ds-lbl">Medie Eșantion</span>
         </div>
         
         <div class="ds-item">
-          <span class="ds-val" style="color:#e05c5c">10.6%</span>
+          <span class="ds-val" style="color:#e05c5c">11.2%</span>
           <span class="ds-lbl">Min — Ploiești</span>
         </div>
         
@@ -936,7 +936,7 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
     <div class="author-block">
       <div class="author-meta">
         Creat de <a href="https://ro.linkedin.com/in/andrei-pruteanu-0b2b2415?trk=people-guest_people_search-card" target="_blank">Andrei Pruteanu</a> cu ajutorul <a href="https://claude.ai" target="_blank">Claude.ai</a><br>
-        17 Jun 2026, 13:05 UTC · v3.0.0
+        17 Jun 2026, 13:22 UTC · v3.0.0
       </div>
     </div>
   </div>
@@ -945,9 +945,9 @@ footer{border-top:1px solid var(--border);padding:24px 40px;background:var(--sur
       <span>▶</span> <span>Data QA — Rezumat Calitate Date</span>
     </summary>
     <div style="margin-top:10px;font-size:11px;color:var(--text-dim);font-family:'IBM Plex Mono',monospace;line-height:1.8;padding:10px 14px;background:var(--surface2);border-radius:6px;border:1px solid var(--border)">
-      <strong style="color:var(--text)">An implicit:</strong> 2023
-      &nbsp;·&nbsp; <strong style="color:var(--text)">Orașe rankabile:</strong> 17/17
-      &nbsp;·&nbsp; <strong style="color:var(--text)">Acoperire medie:</strong> 1.0<br>
+      <strong style="color:var(--text)">An implicit:</strong> 2025
+      &nbsp;·&nbsp; <strong style="color:var(--text)">Orașe rankabile:</strong> 0/17
+      &nbsp;·&nbsp; <strong style="color:var(--text)">Acoperire medie:</strong> 0.6<br>
       <strong style="color:var(--text)">Ani disponibili:</strong> 2016–2026<br>
       <strong style="color:var(--text)">Ani parțiali (YTD):</strong> 2016, 2026<br>
       <strong style="color:var(--text)">Ani cu ta derivat:</strong> 2016–2020, 2024–2026
@@ -17273,7 +17273,7 @@ const CITIES_DATA = [
   }
 ];
 const YEARS_AVAILABLE = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
-const DEFAULT_YEAR = 2023;
+const DEFAULT_YEAR = 2025;
 
 /* ================================================================
    METRICS ENGINE — reads precomputed Python values (ps field)
@@ -17404,7 +17404,7 @@ function downloadData() {
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
   a.href     = url;
-  a.download = 'guvernare-orase-romania-17_Jun_2026,_13-05_UTC.json';
+  a.download = 'guvernare-orase-romania-17_Jun_2026,_13-22_UTC.json';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -17422,7 +17422,7 @@ function downloadPDF() {
   const el = document.getElementById('main-content');
   const opt = {
     margin:       [10, 8, 10, 8],
-    filename:     'romania-governance-17_Jun_2026,_13-05_UTC.pdf',
+    filename:     'romania-governance-17_Jun_2026,_13-22_UTC.pdf',
     image:        { type: 'jpeg', quality: 0.96 },
     html2canvas:  { scale: 1.8, useCORS: true, logging: false },
     jsPDF:        { unit: 'mm', format: 'a3', orientation: 'portrait' },
